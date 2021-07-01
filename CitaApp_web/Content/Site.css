@@ -22,3 +22,23 @@ select,
 textarea {
     max-width: 280px;
 }
+
+body {
+    background-color:rgb(57,62,70);
+}
+
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+    /*#login div{
+        background-color: #808080;
+        padding: 2.5rem;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }*/
