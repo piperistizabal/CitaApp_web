@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f4e552c43ccb4fcb8a0719122b32b702" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="CitAppModel.agendamientos" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.agendamientos_detalles" Width="1.5" PointX="7.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.disponibilidad" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.empresas" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.espacios" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.pagos" Width="1.5" PointX="7.5" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.parametros" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.planes" Width="1.5" PointX="3.625" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.productos" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.profesionales" Width="1.5" PointX="3" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.suscripciones" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.usuarios" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
+        <AssociationConnector Association="CitAppModel.FK__agendamie__id_Ag__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__agendamie__id_Em__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__agendamie__id_Us__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__pagos__id_Agenda__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__agendamie__id_Es__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__agendamie__id_Pr__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__agendamie__id_Pr__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Es__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Pr__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Pr__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__espacios__id_Emp__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__parametro__id_Em__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__productos__id_Em__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__profesion__id_Em__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__suscripci__id_Em__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__usuarios__id_Emp__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__suscripci__id_Pl__571DF1D5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

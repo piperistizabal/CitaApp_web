@@ -1,0 +1,1137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CitAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="agendamientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" Nullable="false" />
+          <Property Name="fechaFin" Type="date" Nullable="false" />
+          <Property Name="horaInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="horaFin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="id_Usuario" Type="int" Nullable="false" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="agendamientos_detalles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Agendamiento" Type="int" />
+          <Property Name="id_Espacio" Type="int" />
+          <Property Name="id_Profesional" Type="int" />
+          <Property Name="id_Producto" Type="int" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="disponibilidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" Nullable="false" />
+          <Property Name="fechaFin" Type="date" Nullable="false" />
+          <Property Name="horaInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="horaFin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="id_Espacio" Type="int" />
+          <Property Name="id_Profesional" Type="int" />
+          <Property Name="id_Producto" Type="int" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="razonSocial" Type="varchar" MaxLength="50" />
+          <Property Name="tipo" Type="varchar" MaxLength="25" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="logo" Type="varchar" MaxLength="100" />
+          <Property Name="correoElectronico" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="espacios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="pagos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Agendamiento" Type="int" Nullable="false" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="saldo" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="parametros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="solicitarPago" Type="bit" />
+          <Property Name="porcentajePago" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="tiempoReagendamiento" Type="int" />
+          <Property Name="tiempoCancelancion" Type="int" />
+          <Property Name="multaCancelacion" Type="bit" />
+          <Property Name="porcentajeCancelacion" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="cantidadAforo" Type="int" Nullable="false" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="duracion" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="stock" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="profesionales">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identificacion" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="suscripciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" Nullable="false" />
+          <Property Name="fechaFin" Type="date" />
+          <Property Name="id_Plan" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identificacion" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="correoElectronico" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="contrasenia" Type="varbinary" MaxLength="8000" Nullable="false" />
+          <Property Name="tipo" Type="int" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="id_Empresa" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <Association Name="FK__agendamie__id_Ag__4BAC3F29">
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agendamientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Agendamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Em__440B1D61">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Es__48CFD27E">
+          <End Role="espacios" Type="Self.espacios" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="espacios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Espacio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Pr__49C3F6B7">
+          <End Role="profesionales" Type="Self.profesionales" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesionales">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Profesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Pr__4AB81AF0">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Us__44FF419A">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__disponibi__id_Es__398D8EEE">
+          <End Role="espacios" Type="Self.espacios" Multiplicity="0..1" />
+          <End Role="disponibilidad" Type="Self.disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="espacios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="disponibilidad">
+              <PropertyRef Name="id_Espacio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__disponibi__id_Pr__3A81B327">
+          <End Role="profesionales" Type="Self.profesionales" Multiplicity="0..1" />
+          <End Role="disponibilidad" Type="Self.disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesionales">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="disponibilidad">
+              <PropertyRef Name="id_Profesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__disponibi__id_Pr__3B75D760">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="disponibilidad" Type="Self.disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="disponibilidad">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__espacios__id_Emp__31EC6D26">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="espacios" Type="Self.espacios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="espacios">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pagos__id_Agenda__4F7CD00D">
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agendamientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_Agendamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__parametro__id_Em__2A4B4B5E">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="parametros" Type="Self.parametros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="parametros">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__id_Em__2E1BDC42">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profesion__id_Em__35BCFE0A">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="profesionales" Type="Self.profesionales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="profesionales">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__suscripci__id_Em__5629CD9C">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="suscripciones" Type="Self.suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="suscripciones">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__suscripci__id_Pl__571DF1D5">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="suscripciones" Type="Self.suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="suscripciones">
+              <PropertyRef Name="id_Plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuarios__id_Emp__403A8C7D">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CitAppModelStoreContainer">
+          <EntitySet Name="agendamientos" EntityType="Self.agendamientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="agendamientos_detalles" EntityType="Self.agendamientos_detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="disponibilidad" EntityType="Self.disponibilidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="espacios" EntityType="Self.espacios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pagos" EntityType="Self.pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parametros" EntityType="Self.parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="planes" EntityType="Self.planes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profesionales" EntityType="Self.profesionales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="suscripciones" EntityType="Self.suscripciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__agendamie__id_Ag__4BAC3F29" Association="Self.FK__agendamie__id_Ag__4BAC3F29">
+            <End Role="agendamientos" EntitySet="agendamientos" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Em__440B1D61" Association="Self.FK__agendamie__id_Em__440B1D61">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="agendamientos" EntitySet="agendamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Es__48CFD27E" Association="Self.FK__agendamie__id_Es__48CFD27E">
+            <End Role="espacios" EntitySet="espacios" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Pr__49C3F6B7" Association="Self.FK__agendamie__id_Pr__49C3F6B7">
+            <End Role="profesionales" EntitySet="profesionales" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Pr__4AB81AF0" Association="Self.FK__agendamie__id_Pr__4AB81AF0">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Us__44FF419A" Association="Self.FK__agendamie__id_Us__44FF419A">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="agendamientos" EntitySet="agendamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__disponibi__id_Es__398D8EEE" Association="Self.FK__disponibi__id_Es__398D8EEE">
+            <End Role="espacios" EntitySet="espacios" />
+            <End Role="disponibilidad" EntitySet="disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__disponibi__id_Pr__3A81B327" Association="Self.FK__disponibi__id_Pr__3A81B327">
+            <End Role="profesionales" EntitySet="profesionales" />
+            <End Role="disponibilidad" EntitySet="disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__disponibi__id_Pr__3B75D760" Association="Self.FK__disponibi__id_Pr__3B75D760">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="disponibilidad" EntitySet="disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__espacios__id_Emp__31EC6D26" Association="Self.FK__espacios__id_Emp__31EC6D26">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="espacios" EntitySet="espacios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pagos__id_Agenda__4F7CD00D" Association="Self.FK__pagos__id_Agenda__4F7CD00D">
+            <End Role="agendamientos" EntitySet="agendamientos" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__parametro__id_Em__2A4B4B5E" Association="Self.FK__parametro__id_Em__2A4B4B5E">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="parametros" EntitySet="parametros" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__id_Em__2E1BDC42" Association="Self.FK__productos__id_Em__2E1BDC42">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profesion__id_Em__35BCFE0A" Association="Self.FK__profesion__id_Em__35BCFE0A">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="profesionales" EntitySet="profesionales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__suscripci__id_Em__5629CD9C" Association="Self.FK__suscripci__id_Em__5629CD9C">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="suscripciones" EntitySet="suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__suscripci__id_Pl__571DF1D5" Association="Self.FK__suscripci__id_Pl__571DF1D5">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="suscripciones" EntitySet="suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuarios__id_Emp__403A8C7D" Association="Self.FK__usuarios__id_Emp__403A8C7D">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CitAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="agendamientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="horaInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="horaFin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos_detalles" Relationship="Self.FK__agendamie__id_Ag__4BAC3F29" FromRole="agendamientos" ToRole="agendamientos_detalles" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__agendamie__id_Em__440B1D61" FromRole="agendamientos" ToRole="empresas" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK__agendamie__id_Us__44FF419A" FromRole="agendamientos" ToRole="usuarios" />
+          <NavigationProperty Name="pagos" Relationship="Self.FK__pagos__id_Agenda__4F7CD00D" FromRole="agendamientos" ToRole="pagos" />
+        </EntityType>
+        <EntityType Name="agendamientos_detalles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Agendamiento" Type="Int32" />
+          <Property Name="id_Espacio" Type="Int32" />
+          <Property Name="id_Profesional" Type="Int32" />
+          <Property Name="id_Producto" Type="Int32" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos" Relationship="Self.FK__agendamie__id_Ag__4BAC3F29" FromRole="agendamientos_detalles" ToRole="agendamientos" />
+          <NavigationProperty Name="espacios" Relationship="Self.FK__agendamie__id_Es__48CFD27E" FromRole="agendamientos_detalles" ToRole="espacios" />
+          <NavigationProperty Name="profesionales" Relationship="Self.FK__agendamie__id_Pr__49C3F6B7" FromRole="agendamientos_detalles" ToRole="profesionales" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__agendamie__id_Pr__4AB81AF0" FromRole="agendamientos_detalles" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="disponibilidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="horaInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="horaFin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="id_Espacio" Type="Int32" />
+          <Property Name="id_Profesional" Type="Int32" />
+          <Property Name="id_Producto" Type="Int32" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="espacios" Relationship="Self.FK__disponibi__id_Es__398D8EEE" FromRole="disponibilidad" ToRole="espacios" />
+          <NavigationProperty Name="profesionales" Relationship="Self.FK__disponibi__id_Pr__3A81B327" FromRole="disponibilidad" ToRole="profesionales" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__disponibi__id_Pr__3B75D760" FromRole="disponibilidad" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="razonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos" Relationship="Self.FK__agendamie__id_Em__440B1D61" FromRole="empresas" ToRole="agendamientos" />
+          <NavigationProperty Name="espacios" Relationship="Self.FK__espacios__id_Emp__31EC6D26" FromRole="empresas" ToRole="espacios" />
+          <NavigationProperty Name="parametros" Relationship="Self.FK__parametro__id_Em__2A4B4B5E" FromRole="empresas" ToRole="parametros" />
+          <NavigationProperty Name="productos" Relationship="Self.FK__productos__id_Em__2E1BDC42" FromRole="empresas" ToRole="productos" />
+          <NavigationProperty Name="profesionales" Relationship="Self.FK__profesion__id_Em__35BCFE0A" FromRole="empresas" ToRole="profesionales" />
+          <NavigationProperty Name="suscripciones" Relationship="Self.FK__suscripci__id_Em__5629CD9C" FromRole="empresas" ToRole="suscripciones" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK__usuarios__id_Emp__403A8C7D" FromRole="empresas" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="espacios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos_detalles" Relationship="Self.FK__agendamie__id_Es__48CFD27E" FromRole="espacios" ToRole="agendamientos_detalles" />
+          <NavigationProperty Name="disponibilidad" Relationship="Self.FK__disponibi__id_Es__398D8EEE" FromRole="espacios" ToRole="disponibilidad" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__espacios__id_Emp__31EC6D26" FromRole="espacios" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="pagos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Agendamiento" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="saldo" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos" Relationship="Self.FK__pagos__id_Agenda__4F7CD00D" FromRole="pagos" ToRole="agendamientos" />
+        </EntityType>
+        <EntityType Name="parametros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="solicitarPago" Type="Boolean" />
+          <Property Name="porcentajePago" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="tiempoReagendamiento" Type="Int32" />
+          <Property Name="tiempoCancelancion" Type="Int32" />
+          <Property Name="multaCancelacion" Type="Boolean" />
+          <Property Name="porcentajeCancelacion" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cantidadAforo" Type="Int32" Nullable="false" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__parametro__id_Em__2A4B4B5E" FromRole="parametros" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="duracion" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="suscripciones" Relationship="Self.FK__suscripci__id_Pl__571DF1D5" FromRole="planes" ToRole="suscripciones" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stock" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos_detalles" Relationship="Self.FK__agendamie__id_Pr__4AB81AF0" FromRole="productos" ToRole="agendamientos_detalles" />
+          <NavigationProperty Name="disponibilidad" Relationship="Self.FK__disponibi__id_Pr__3B75D760" FromRole="productos" ToRole="disponibilidad" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__productos__id_Em__2E1BDC42" FromRole="productos" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="profesionales">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identificacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos_detalles" Relationship="Self.FK__agendamie__id_Pr__49C3F6B7" FromRole="profesionales" ToRole="agendamientos_detalles" />
+          <NavigationProperty Name="disponibilidad" Relationship="Self.FK__disponibi__id_Pr__3A81B327" FromRole="profesionales" ToRole="disponibilidad" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__profesion__id_Em__35BCFE0A" FromRole="profesionales" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="suscripciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFin" Type="DateTime" Precision="0" />
+          <Property Name="id_Plan" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__suscripci__id_Em__5629CD9C" FromRole="suscripciones" ToRole="empresas" />
+          <NavigationProperty Name="planes" Relationship="Self.FK__suscripci__id_Pl__571DF1D5" FromRole="suscripciones" ToRole="planes" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identificacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasenia" Type="Binary" MaxLength="8000" FixedLength="false" Nullable="false" />
+          <Property Name="tipo" Type="Int32" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_Empresa" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="agendamientos" Relationship="Self.FK__agendamie__id_Us__44FF419A" FromRole="usuarios" ToRole="agendamientos" />
+          <NavigationProperty Name="empresas" Relationship="Self.FK__usuarios__id_Emp__403A8C7D" FromRole="usuarios" ToRole="empresas" />
+        </EntityType>
+        <Association Name="FK__agendamie__id_Ag__4BAC3F29">
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agendamientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Agendamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Em__440B1D61">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Us__44FF419A">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pagos__id_Agenda__4F7CD00D">
+          <End Role="agendamientos" Type="Self.agendamientos" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agendamientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_Agendamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Es__48CFD27E">
+          <End Role="espacios" Type="Self.espacios" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="espacios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Espacio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Pr__49C3F6B7">
+          <End Role="profesionales" Type="Self.profesionales" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesionales">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Profesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agendamie__id_Pr__4AB81AF0">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="agendamientos_detalles" Type="Self.agendamientos_detalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agendamientos_detalles">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__disponibi__id_Es__398D8EEE">
+          <End Role="espacios" Type="Self.espacios" Multiplicity="0..1" />
+          <End Role="disponibilidad" Type="Self.disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="espacios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="disponibilidad">
+              <PropertyRef Name="id_Espacio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__disponibi__id_Pr__3A81B327">
+          <End Role="profesionales" Type="Self.profesionales" Multiplicity="0..1" />
+          <End Role="disponibilidad" Type="Self.disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesionales">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="disponibilidad">
+              <PropertyRef Name="id_Profesional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__disponibi__id_Pr__3B75D760">
+          <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+          <End Role="disponibilidad" Type="Self.disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="disponibilidad">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__espacios__id_Emp__31EC6D26">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="espacios" Type="Self.espacios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="espacios">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__parametro__id_Em__2A4B4B5E">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="parametros" Type="Self.parametros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="parametros">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productos__id_Em__2E1BDC42">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profesion__id_Em__35BCFE0A">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="profesionales" Type="Self.profesionales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="profesionales">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__suscripci__id_Em__5629CD9C">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="suscripciones" Type="Self.suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="suscripciones">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuarios__id_Emp__403A8C7D">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__suscripci__id_Pl__571DF1D5">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="suscripciones" Type="Self.suscripciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="suscripciones">
+              <PropertyRef Name="id_Plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CitAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="agendamientos" EntityType="Self.agendamientos" />
+          <EntitySet Name="agendamientos_detalles" EntityType="Self.agendamientos_detalles" />
+          <EntitySet Name="disponibilidad" EntityType="Self.disponibilidad" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" />
+          <EntitySet Name="espacios" EntityType="Self.espacios" />
+          <EntitySet Name="pagos" EntityType="Self.pagos" />
+          <EntitySet Name="parametros" EntityType="Self.parametros" />
+          <EntitySet Name="planes" EntityType="Self.planes" />
+          <EntitySet Name="productos" EntityType="Self.productos" />
+          <EntitySet Name="profesionales" EntityType="Self.profesionales" />
+          <EntitySet Name="suscripciones" EntityType="Self.suscripciones" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <AssociationSet Name="FK__agendamie__id_Ag__4BAC3F29" Association="Self.FK__agendamie__id_Ag__4BAC3F29">
+            <End Role="agendamientos" EntitySet="agendamientos" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Em__440B1D61" Association="Self.FK__agendamie__id_Em__440B1D61">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="agendamientos" EntitySet="agendamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Us__44FF419A" Association="Self.FK__agendamie__id_Us__44FF419A">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="agendamientos" EntitySet="agendamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pagos__id_Agenda__4F7CD00D" Association="Self.FK__pagos__id_Agenda__4F7CD00D">
+            <End Role="agendamientos" EntitySet="agendamientos" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Es__48CFD27E" Association="Self.FK__agendamie__id_Es__48CFD27E">
+            <End Role="espacios" EntitySet="espacios" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Pr__49C3F6B7" Association="Self.FK__agendamie__id_Pr__49C3F6B7">
+            <End Role="profesionales" EntitySet="profesionales" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agendamie__id_Pr__4AB81AF0" Association="Self.FK__agendamie__id_Pr__4AB81AF0">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="agendamientos_detalles" EntitySet="agendamientos_detalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__disponibi__id_Es__398D8EEE" Association="Self.FK__disponibi__id_Es__398D8EEE">
+            <End Role="espacios" EntitySet="espacios" />
+            <End Role="disponibilidad" EntitySet="disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__disponibi__id_Pr__3A81B327" Association="Self.FK__disponibi__id_Pr__3A81B327">
+            <End Role="profesionales" EntitySet="profesionales" />
+            <End Role="disponibilidad" EntitySet="disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__disponibi__id_Pr__3B75D760" Association="Self.FK__disponibi__id_Pr__3B75D760">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="disponibilidad" EntitySet="disponibilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__espacios__id_Emp__31EC6D26" Association="Self.FK__espacios__id_Emp__31EC6D26">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="espacios" EntitySet="espacios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__parametro__id_Em__2A4B4B5E" Association="Self.FK__parametro__id_Em__2A4B4B5E">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="parametros" EntitySet="parametros" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productos__id_Em__2E1BDC42" Association="Self.FK__productos__id_Em__2E1BDC42">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profesion__id_Em__35BCFE0A" Association="Self.FK__profesion__id_Em__35BCFE0A">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="profesionales" EntitySet="profesionales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__suscripci__id_Em__5629CD9C" Association="Self.FK__suscripci__id_Em__5629CD9C">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="suscripciones" EntitySet="suscripciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuarios__id_Emp__403A8C7D" Association="Self.FK__usuarios__id_Emp__403A8C7D">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__suscripci__id_Pl__571DF1D5" Association="Self.FK__suscripci__id_Pl__571DF1D5">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="suscripciones" EntitySet="suscripciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CitAppModelStoreContainer" CdmEntityContainer="CitAppEntities">
+          <EntitySetMapping Name="agendamientos">
+            <EntityTypeMapping TypeName="CitAppModel.agendamientos">
+              <MappingFragment StoreEntitySet="agendamientos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="agendamientos_detalles">
+            <EntityTypeMapping TypeName="CitAppModel.agendamientos_detalles">
+              <MappingFragment StoreEntitySet="agendamientos_detalles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Agendamiento" ColumnName="id_Agendamiento" />
+                <ScalarProperty Name="id_Espacio" ColumnName="id_Espacio" />
+                <ScalarProperty Name="id_Profesional" ColumnName="id_Profesional" />
+                <ScalarProperty Name="id_Producto" ColumnName="id_Producto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="disponibilidad">
+            <EntityTypeMapping TypeName="CitAppModel.disponibilidad">
+              <MappingFragment StoreEntitySet="disponibilidad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="id_Espacio" ColumnName="id_Espacio" />
+                <ScalarProperty Name="id_Profesional" ColumnName="id_Profesional" />
+                <ScalarProperty Name="id_Producto" ColumnName="id_Producto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresas">
+            <EntityTypeMapping TypeName="CitAppModel.empresas">
+              <MappingFragment StoreEntitySet="empresas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="espacios">
+            <EntityTypeMapping TypeName="CitAppModel.espacios">
+              <MappingFragment StoreEntitySet="espacios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pagos">
+            <EntityTypeMapping TypeName="CitAppModel.pagos">
+              <MappingFragment StoreEntitySet="pagos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Agendamiento" ColumnName="id_Agendamiento" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parametros">
+            <EntityTypeMapping TypeName="CitAppModel.parametros">
+              <MappingFragment StoreEntitySet="parametros">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="solicitarPago" ColumnName="solicitarPago" />
+                <ScalarProperty Name="porcentajePago" ColumnName="porcentajePago" />
+                <ScalarProperty Name="tiempoReagendamiento" ColumnName="tiempoReagendamiento" />
+                <ScalarProperty Name="tiempoCancelancion" ColumnName="tiempoCancelancion" />
+                <ScalarProperty Name="multaCancelacion" ColumnName="multaCancelacion" />
+                <ScalarProperty Name="porcentajeCancelacion" ColumnName="porcentajeCancelacion" />
+                <ScalarProperty Name="cantidadAforo" ColumnName="cantidadAforo" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planes">
+            <EntityTypeMapping TypeName="CitAppModel.planes">
+              <MappingFragment StoreEntitySet="planes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="CitAppModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profesionales">
+            <EntityTypeMapping TypeName="CitAppModel.profesionales">
+              <MappingFragment StoreEntitySet="profesionales">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="suscripciones">
+            <EntityTypeMapping TypeName="CitAppModel.suscripciones">
+              <MappingFragment StoreEntitySet="suscripciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="id_Plan" ColumnName="id_Plan" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CitAppModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="CitAppModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="id_Empresa" ColumnName="id_Empresa" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
