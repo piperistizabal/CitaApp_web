@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="198a0c64ce464e72bf90eff155079179" Name="Diagram1">
+        <EntityTypeShape EntityType="CitAppModel.disponibilidad" Width="1.5" PointX="5.25" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.disponibilidad_empresa" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.disponibilidad_recursos" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.empresas" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.espacios" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.pagos" Width="1.5" PointX="7.5" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.parametros" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.planes" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.productos" Width="1.5" PointX="3" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.profesionales" Width="1.5" PointX="3" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.suscripciones" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="CitAppModel.usuarios" Width="1.5" PointX="3" PointY="39" IsExpanded="true" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Di__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Em__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Es__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Pr__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Pr__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Us__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__pagos__id_Dispon__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Em__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Em__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Es__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Pr__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__disponibi__id_Pr__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__espacios__id_Emp__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__parametro__id_Em__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__productos__id_Em__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__profesion__id_Em__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__suscripci__id_Em__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__usuarios__id_Emp__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="CitAppModel.FK__suscripci__id_Pl__59063A47" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
